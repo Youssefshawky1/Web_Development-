@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting Page</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dcecf5, #b9cdea);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            width: 350px;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        h1 {
+            color: #596579;
+            margin-bottom: 25px;
+        }
+
+        input {
+            padding: 12px;
+            width: 60%;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #6495ed;
+        }
+
+        button {
+            padding: 12px 15px;
+            background-color: #6495ed;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4169e1;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            color: #555;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        li:hover {
+            background-color: #f0f5ff;
+        }
+
+        .hint {
+            color: #888;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 id="title">Welcome</h1>
+
+        <input id="name" type="text" placeholder="Your name">
+        <button id="greet">Greet</button>
+
+        <p class="hint">Click a name below to say goodbye.</p>
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        // Function to greet the user and add their name to the list
+        function addName() {
+            const input = document.getElementById("name");
+            const name = input.value.trim();
+
+            if (!name) return;
+
+            document.getElementById("title").textContent =
+                `Hello, ${name}!`;
+
+            const li = document.createElement("li");
+            li.textContent = name;
+
+            document.getElementById("list").appendChild(li);
+
+            input.value = "";
+            input.focus();
+        }
+
+        // Function to say goodbye when a name is clicked
+        function removeName(e) {
+            if (e.target.nodeName === "LI") {
+                const name = e.target.textContent;
+
+                document.getElementById("title").textContent =
+                    `Goodbye, ${name}! See you later.`;
+
+                e.target.remove();
+            }
+        }
+
+        // Attach event listeners
+        document.getElementById("greet")
+            .addEventListener("click", addName);
+
+        document.getElementById("list")
+            .addEventListener("click", removeName);
+    </script>
+
+</body>
+
+</html>
